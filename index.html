@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oxygen Requirement Calculator</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to CSS -->
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h1>Oxygen Requirement Calculator</h1>
+            <form id="calculator">
+                <label for="weight">Weight (kg):</label>
+                <input type="number" id="weight" required>
+
+                <label for="height">Height (cm):</label>
+                <input type="number" id="height" required>
+
+                <label for="age">Age (years):</label>
+                <input type="number" id="age" required>
+
+                <label for="sex">Sex:</label>
+                <select id="sex" required>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+
+                <label for="activity">Activity Level:</label>
+                <select id="activity" required>
+                    <option value="1.2">Sedentary</option>
+                    <option value="1.375">Lightly Active</option>
+                    <option value="1.55">Moderately Active</option>
+                    <option value="1.725">Very Active</option>
+                    <option value="1.9">Extra Active</option>
+                </select>
+
+                <label for="hb">Hemoglobin (g/dL):</label>
+                <input type="number" id="hb" value="15" required>
+
+                <label for="spo2">SpO₂ (%):</label>
+                <input type="number" id="spo2" required>
+
+                <label for="sv02">SvO₂ (%):</label>
+                <input type="number" id="sv02" value="75" required>
+
+                <label for="hr">Heart Rate (bpm):</label>
+                <input type="number" id="hr" required>
+
+                <label for="sv">Stroke Volume (mL):</label>
+                <input type="number" id="sv" value="90" required>
+
+                <button type="button" onclick="calculate()">Calculate O₂ Requirement</button>
+            </form>
+
+            <div id="result"></div>
+
+            <button type="button" onclick="openModal()">References</button>
+            <button type="button" onclick="saveToExcel()">Save to Excel</button>
+
+
+            <div id="myModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal()">&times;</span>
+                    <h2>Lookup Table</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Heart Rate (bpm)</th>
+                                <th>SpO₂ (%)</th>
+                                <th>SvO₂ (%)</th>
+                                <th>O₂ Requirement (L/min)</th>
+                                <th>Clinical Considerations</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>60 - 80</td><td>95 - 100</td><td>70 - 80</td><td>0 - 1</td><td>Normal; no oxygen therapy needed.</td></tr>
+                            <tr><td>60 - 80</td><td>90 - 94</td><td>65 - 75</td><td>1 - 2</td><td>Mild hypoxemia; monitor closely.</td></tr>
+                            <tr><td>60 - 100</td><td>&lt; 90</td><td>&lt; 70</td><td>2 - 4</td><td>Moderate hypoxemia; consider supplemental oxygen.</td></tr>
+                            <tr><td>60 - 80</td><td>85 - 89</td><td>60 - 70</td><td>2 - 4</td><td>Moderate hypoxemia; monitor closely.</td></tr>
+                            <tr><td>60 - 120</td><td>80 - 84</td><td>55 - 65</td><td>4 - 6</td><td>Significant hypoxemia; consider hospitalization.</td></tr>
+                            <tr><td>80 - 140</td><td>75 - 79</td><td>&lt; 55</td><td>6 - 8</td><td>Severe anemia; immediate intervention needed.</td></tr>
+                            <tr><td>100 - 160</td><td>&lt; 75</td><td>&lt; 50</td><td>8 - 10</td><td>Critical condition; likely requires ICU care.</td></tr>
+                            <tr><td>&gt; 160</td><td>&lt; 75</td><td>&lt; 50</td><td>&gt; 10</td><td>Life-threatening; aggressive management needed.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Log Table -->
+        <div class="log-container">
+            <h2>Log of Calculated Results</h2>
+            <table id="resultsTable">
+                <thead>
+                    <tr>
+                        <th>Heart Rate (bpm)</th>
+                        <th>SpO₂ (%)</th>
+                        <th>O₂ Requirement (mL/min)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Results will be inserted here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="script.js"></script> <!-- Link to JavaScript -->
+</body>
+</html>
+
